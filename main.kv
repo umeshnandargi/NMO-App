@@ -1,0 +1,577 @@
+WindowManager:
+    MainWindow:
+    GaussTwoWindow:
+    GaussThreeWindow:
+    TrapWindow:
+    SimpsonOneWindow:
+    SimpsonThreeWindow:
+
+
+
+<MainWindow>:
+    name:"main"
+    BoxLayout:
+        orientation : "vertical"
+        padding: 10
+        spacing: 10
+        cols: 2
+        size : root.width, root.height
+        Button:
+            text: "Gauss Quadrature 2\npoint Formula"
+            color: (20/255,61/255,89/255,1)
+            background_normal : ""
+            background_color : (0,0,0,0)
+            canvas.before:
+                Color:
+                    rgba: (239/255, 193/255, 100/255,1) #actual Button background
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [25]
+            #font_size : 15
+            on_release:
+                app.root.current = "gl2p"
+                root.manager.transition.direction = "up"
+
+        Button:
+            text: "Gauss Quadrature 3\npoint Formula"
+            color: (189/255,255/255,246/255,1)
+            background_normal : ""
+            background_color : (0,0,0,0)
+            canvas.before:
+                Color:
+                    rgba: (255/255, 131/255, 93/255,0.8) #actual Button background
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [25]
+            on_release:
+                app.root.current = "gl3p"
+                root.manager.transition.direction = "up"
+
+        Button:
+            text: "Simpson's 1/3 Rule"
+            color: (118/255,17/255,55/255,1)
+            background_normal : ""
+            background_color : (0,0,0,0)
+            canvas.before:
+                Color:
+                    rgba: (243/255,89/255,85/255,1) #actual Button background
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [25]
+            on_release:
+                app.root.current = "sim13"
+                root.manager.transition.direction = "right"
+
+        Button:
+            text: "Simpson's 3/8 Rule"
+            color: (235/255,235/255,222/255,1)
+            background_normal : ""
+            background_color : (0,0,0,0)
+            canvas.before:
+                Color:
+                    rgba: (119/255,119/255,100/255,1) #actual Button background
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [25]
+            on_release:
+                app.root.current = "sim38"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Trapezoidal Rule"
+            color: (239/255, 193/255, 100/255,1)
+            background_normal : ""
+            background_color : (0,0,0,0)
+            canvas.before:
+                Color:
+                    rgba: (40/255,98/255,117/255,1) #actual Button background
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [25]
+            on_release:
+                app.root.current = "trap"
+                root.manager.transition.direction = "right"
+
+        Button:
+            text: "Coming Soon..."
+            color: (206/255,222/255,240/255, 1)
+            background_normal : ""
+            background_color : (0,0,0,0)
+            canvas.before:
+                Color:
+                    rgba: (0/255,67/255,76/255,1) #actual Button background
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [25]
+            on_release: root.btn()
+
+<GaussTwoWindow>:
+    name:"gl2p"
+    func: func_id
+    ul: ul_id
+    ll: ll_id
+
+    GridLayout:
+        cols :1
+        size : root.width, root.height
+        padding: 5
+        spacing: 5
+
+        GridLayout:
+            cols:2
+            padding : 3
+            spacing : 5
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [(60, 60),(0, 0),(60, 60),(0,0)]
+
+            Label:
+                text: "Enter Function:"
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: func_id
+                multiline:False
+
+            Label:
+                text: "Enter Upper Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ul_id
+                multiline:False
+
+            Label:
+                text: "Enter Lower Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ll_id
+                multiline:False
+
+            Button:
+                id: btn
+                text : "Submit"
+                size_hint : 0.5,0.5
+                font_size:55
+                color : 20/255,61/255,89/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(244/255,180/255,26/255,1) if btn.state == 'normal' else (244/255,180/255,26/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(60,60),(0,0),(0,0),(0,0)]
+                on_release : root.button()
+
+            Button:
+                id: btn2
+                text : "Go Back"
+                size_hint : 0.3,0.3
+                font_size:55
+                color : 244/255,180/255,26/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(20/255,61/255,89/255,1) if btn2.state == 'normal' else (20/255,61/255,89/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(0,0),(0,0),(60,60),(0,0)]
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "down"
+
+
+<GaussThreeWindow>
+    name:"gl3p"
+    func: func_id
+    ul: ul_id
+    ll: ll_id
+
+    GridLayout:
+        cols :1
+        size : root.width, root.height
+        padding: 5
+        spacing: 5
+
+        GridLayout:
+            cols:2
+            padding : 3
+            spacing : 5
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [(60, 60),(0, 0),(60, 60),(0,0)]
+
+            Label:
+                text: "Enter Function:"
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: func_id
+                multiline:False
+
+            Label:
+                text: "Enter Upper Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ul_id
+                multiline:False
+
+            Label:
+                text: "Enter Lower Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ll_id
+                multiline:False
+
+            Button:
+                id: btn
+                text : "Submit"
+                size_hint : 0.5,0.5
+                font_size:55
+                color : 20/255,61/255,89/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(244/255,180/255,26/255,1) if btn.state == 'normal' else (244/255,180/255,26/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(60,60),(0,0),(0,0),(0,0)]
+                on_release : root.button()
+
+            Button:
+                id: btn2
+                text : "Go Back"
+                size_hint : 0.3,0.3
+                font_size:55
+                color : 244/255,180/255,26/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(20/255,61/255,89/255,1) if btn2.state == 'normal' else (20/255,61/255,89/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(0,0),(0,0),(60,60),(0,0)]
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "down"
+
+<TrapWindow>:
+    name:"trap"
+    func: func_id
+    ul: ul_id
+    ll: ll_id
+    n: n_id
+
+    GridLayout:
+        cols :1
+        size : root.width, root.height
+        padding: 5
+        spacing: 5
+
+        GridLayout:
+            cols:2
+            padding : 3
+            spacing : 5
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [(60, 60),(0, 0),(60, 60),(0,0)]
+
+            Label:
+                text: "Enter Function:"
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: func_id
+                multiline:False
+
+            Label:
+                text: "Enter Upper Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ul_id
+                multiline:False
+
+            Label:
+                text: "Enter Lower Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ll_id
+                multiline:False
+
+            Label:
+                text: "Enter Number of Strips: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: n_id
+                multiline:False
+
+            Button:
+                id: btn
+                text : "Submit"
+                size_hint : 0.5,0.5
+                font_size:55
+                color : 20/255,61/255,89/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(244/255,180/255,26/255,1) if btn.state == 'normal' else (244/255,180/255,26/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(60,60),(0,0),(0,0),(0,0)]
+                on_release : root.button()
+
+            Button:
+                id: btn2
+                text : "Go Back"
+                size_hint : 0.3,0.3
+                font_size:55
+                color : 244/255,180/255,26/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(20/255,61/255,89/255,1) if btn2.state == 'normal' else (20/255,61/255,89/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(0,0),(0,0),(60,60),(0,0)]
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "left"
+
+<SimpsonOneWindow>:
+    name:"sim13"
+    func: func_id
+    ul: ul_id
+    ll: ll_id
+    n: n_id
+
+    GridLayout:
+        cols :1
+        size : root.width, root.height
+        padding: 5
+        spacing: 5
+
+        GridLayout:
+            cols:2
+            padding : 3
+            spacing : 5
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [(60, 60),(0, 0),(60, 60),(0,0)]
+
+            Label:
+                text: "Enter Function:"
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: func_id
+                multiline:False
+
+            Label:
+                text: "Enter Upper Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ul_id
+                multiline:False
+
+            Label:
+                text: "Enter Lower Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ll_id
+                multiline:False
+
+            Label:
+                text: "Enter Number of Strips: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: n_id
+                multiline:False
+
+            Button:
+                id: btn
+                text : "Submit"
+                size_hint : 0.5,0.5
+                font_size:55
+                color : 20/255,61/255,89/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(244/255,180/255,26/255,1) if btn.state == 'normal' else (244/255,180/255,26/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(60,60),(0,0),(0,0),(0,0)]
+                on_release : root.button()
+
+            Button:
+                id: btn2
+                text : "Go Back"
+                size_hint : 0.3,0.3
+                font_size:55
+                color : 244/255,180/255,26/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(20/255,61/255,89/255,1) if btn2.state == 'normal' else (20/255,61/255,89/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(0,0),(0,0),(60,60),(0,0)]
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "left"
+
+<SimpsonThreeWindow>:
+    name:"sim38"
+    func: func_id
+    ul: ul_id
+    ll: ll_id
+    n: n_id
+
+    GridLayout:
+        cols :1
+        size : root.width, root.height
+        padding: 5
+        spacing: 5
+
+        GridLayout:
+            cols:2
+            padding : 3
+            spacing : 5
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [(60, 60),(0, 0),(60, 60),(0,0)]
+
+
+            Label:
+                text: "Enter Function:"
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: func_id
+                multiline: False
+
+            Label:
+                text: "Enter Upper Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ul_id
+                multiline:False
+
+            Label:
+                text: "Enter Lower Limit: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: ll_id
+                multiline:False
+
+            Label:
+                text: "Enter Number of Strips: "
+                font_size : 45
+                color: 0,0,0,1
+            TextInput:
+                id: n_id
+                multiline:False
+
+            Button:
+                id: btn
+                text : "Submit"
+                size_hint : 0.5,0.5
+                font_size:55
+                color : 20/255,61/255,89/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(244/255,180/255,26/255,1) if btn.state == 'normal' else (244/255,180/255,26/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(60,60),(0,0),(0,0),(0,0)]
+                on_release : root.button()
+
+            Button:
+                id: btn2
+                text : "Go Back"
+                size_hint : 0.3,0.3
+                font_size:55
+                color : 244/255,180/255,26/255,1
+                background_normal : ""
+                background_color : (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba:(20/255,61/255,89/255,1) if btn2.state == 'normal' else (20/255,61/255,89/255,0.2)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [(0,0),(0,0),(60,60),(0,0)]
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+
+<CustomButton@Button>
+    id : cst_btn
+    text: "Close"
+    font_size : 55
+    color: (55/255,40/255,0/255,1)
+    size_hint_y: 0.15
+    background_normal : ""
+    background_color : (0,0,0,0)
+    canvas.before:
+        Color:
+            rgba: (246/255,182/255,13/255,0.8) if cst_btn.state == 'normal' else (246/255,182/255,13/255,0.3)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [25]
